@@ -21,3 +21,8 @@ This script can be used to create playlists featuring new releases from specifie
 ## Running the app
 1. Python must be installed on the device
 2. App can be run from the command line using the command **python3 trackFavouriteArtists.py**
+
+## Future Additions
+- Delete old playlists
+- Move liked songs to a new playlist 
+- Make it possible to download liked songs
