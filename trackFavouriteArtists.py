@@ -88,7 +88,7 @@ def create_playlist(headers, last_run):
    if not last_run:
      last_run = (datetime.today() - timedelta(days=31)).strftime('%Y-%m-%d')
 
-   data = {'name': 'New Music Sinceince ' + last_run}
+   data = {'name': 'New Music Since ' + last_run}
    data['description'] = 'Playlist filled with new songs since the script last ran'
    data['public'] = 'false'
 
