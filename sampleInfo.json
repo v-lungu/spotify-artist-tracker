@@ -1,6 +1,5 @@
 {
     "clientId" : "abc123",
-    "clientSecret" : "321cba",
     "lastRun" : null,
     "artists" : [
         "Sammy Virji", 

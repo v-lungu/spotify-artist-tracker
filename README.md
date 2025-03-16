@@ -11,6 +11,7 @@ This script can be used to create playlists featuring new releases from specifie
 3. From the dashboard select the app just created
 4. Click the *Settings* button 
 5. **client id** and **client secret** can be found here
+6. Install all required libraries with **python -m pip install -r requirements.txt**
 
 ### Fill in info.json with your personalized information
 1. Rename **sampleInfo.json** to **info.json**
