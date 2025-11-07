@@ -2,6 +2,7 @@ import json
 import base64
 import random
 import string
+import time
 from requests import get, post
 from hashlib import sha256
 import webbrowser
@@ -9,9 +10,7 @@ from datetime import datetime, timedelta
 
 def get_token(client_id):
    verifier = ''.join(random.choices(string.ascii_letters+ string.digits, k=64))
-   challenge = base64.urlsafe_b64encode(
-        sha256(verifier.encode('utf-8')).digest()
-    ).decode('utf-8').rstrip('=')
+   challenge = base64.urlsafe_b64encode(sha256(verifier.encode('utf-8')).digest()).decode('utf-8').rstrip('=')
    
    url_auth = 'https://accounts.spotify.com/authorize'
    data_auth = {'client_id': client_id}
@@ -67,9 +66,15 @@ def get_artist_music_since_last_run(headers, date, artist):
 
   for result in result_json:
      date_released = datetime.strptime(result.get('album').get('release_date'), '%Y-%m-%d')
+
      name = result.get('name')
-     if date_released >= date:
-        tracks[name] = result.get('uri')
+     artists = []
+     for i in result.get('artists'):
+        artists.append(i.get('name'))
+
+     if date_released >= date: 
+         if artist in artists:
+            tracks[name] = result.get('uri')
 
   return tracks
 
@@ -99,14 +104,17 @@ def create_playlist(headers, last_run):
 
 def populate_playlist(headers, playlist_id, tracks):
    url =  'https://api.spotify.com/v1/playlists/' + playlist_id + '/tracks'
-   
+
    data = {'position': '0'}
    data['uris'] = ', '.join(repr(x) for x in tracks.values())
    data['uris'] = list(tracks.values())
    
-   result = post(url=url, headers=headers, json=data)
-   json_result = json.loads(result.content)
-   print(json_result)
+   for i in range(0, len(data['uris']), 100):
+      data_post = {'position': '0'}
+      data_post['uris'] = data['uris'][i:i+100]
+      result = post(url=url, headers=headers, json=data_post)
+      json_result = json.loads(result.content)
+      print(json_result)
 
 
 def main():
@@ -134,4 +142,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

@@ -23,6 +23,8 @@ This script can be used to create playlists featuring new releases from specifie
 2. App can be run from the command line using the command **python3 trackFavouriteArtists.py**
 
 ## Future Additions
+- Tighter controls on artist names when creating playlist
+- Look into automating getting the browser code
 - Delete old playlists
 - Move liked songs to a new playlist 
 - Make it possible to download liked songs
