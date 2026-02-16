@@ -65,7 +65,10 @@ def get_artist_music_since_last_run(headers, date, artist):
   tracks = dict()
 
   for result in result_json:
-     date_released = datetime.strptime(result.get('album').get('release_date'), '%Y-%m-%d')
+     if (result.get('album').get('release_date_precision')) == 'month': 
+        date_released = datetime.strptime(result.get('album').get('release_date') + '-01', '%Y-%m-%d')
+     else:
+         date_released = datetime.strptime(result.get('album').get('release_date'), '%Y-%m-%d')
 
      name = result.get('name')
      artists = []
