@@ -2,3 +2,10 @@ info.json
 backupInfo.json
 
 .venv
+
+#Django
+.env
+db.sqlite3
+__pycache__/
+*.pyc
+staticfiles/
